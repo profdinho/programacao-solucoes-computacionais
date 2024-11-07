@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.profdinho.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import br.com.profdinho.jdbc.ConexaoBD;
 import br.com.profdinho.model.Usuario;
 
@@ -33,6 +32,29 @@ public class UsuarioDAO {
             ps.setString(4, usuario.getSenha());
             ps.execute();
             ps.close();
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public List<Usuario> getLista() {
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM usuario";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setCelular(rs.getString("celular"));
+                usuario.setEmail(rs.getString("email"));
+                usuarios.add(usuario);
+            }
+            rs.close();
+            ps.close();
+            return usuarios;
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
