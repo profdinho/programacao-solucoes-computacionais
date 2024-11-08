@@ -163,7 +163,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             String nome = usuario.getNome();
             String celular = usuario.getCelular();
             String email = usuario.getEmail();
-            model.addRow(new Object[]{id, celular, nome, email});
+            model.addRow(new Object[]{id, nome, celular, email});
         }
     }
     /**

@@ -206,6 +206,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja sair do cadastro?");
         if (resposta == 0) {
+            new TelaLogin().setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_formWindowClosing

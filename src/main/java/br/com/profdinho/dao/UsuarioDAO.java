@@ -61,4 +61,24 @@ public class UsuarioDAO {
         }
     }
     
+    public boolean login(String usuario, String senha) {
+        String sql = "SELECT * FROM usuario WHERE nome = ?"
+                + " AND senha = ?";
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ps.setString(2, senha);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
 }
